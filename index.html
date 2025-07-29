@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- 
       Application Structure:
-      This is a single-page application (SPA) using a tab-based navigation system. This structure is ideal for breaking down complex game rules into logical, manageable sections (Overview, Game Flow, Actions, etc.). It allows new players to learn step-by-step, while letting experienced players quickly find specific information, like commands, without scrolling through a long document. The design guides the user from a high-level summary to detailed mechanics, which is optimal for learning and usability.
+      This is a single-page application (SPA) using a tab-based navigation system. This structure is ideal for breaking down complex game rules into logical, manageable sections (Overview, Game Flow, Actions, etc.). It allows new players to learn step-by-step, while letting experienced players quickly find specific information, like commands, without scrolling through a long document. The design guides the user from a high-level summary to all details, which is optimal for learning and usability.
 
       Visualization & Content Choices:
       - Game Flow Diagram: A responsive, horizontal flowchart built with styled HTML/CSS. A visual diagram is more intuitive than text for understanding a cyclical process. JavaScript is used to handle clicks to show details for each stage.
@@ -60,6 +60,12 @@
                     <h2 class="text-2xl font-bold text-white mb-4">Welcome to the Game</h2>
                     <p class="text-lg leading-relaxed">Among a group of **Faithful**, a small team of **Traitors** have been secretly chosen. Their mission is to build their fortune by murdering the Faithful and seizing their points. The Faithful must work together to identify and banish the Traitors through daily votes. Every decision has consequences. Can the Faithful unmask the villains before their team's points run out? Or will the Traitors deceive their way to victory? Trust no one. Question everything. Your survival depends on it.</p>
                 </div>
+
+                <div class="p-4 border-l-4 border-red-500 bg-slate-800 rounded">
+                    <h3 class="text-xl font-bold text-red-400 mb-2">Critical Rule: No Forwarding!</h3>
+                    <p class="leading-relaxed">The bot's direct messages (DMs) contain secret information about your role. **Forwarding these messages is strictly forbidden.** Revealing your role by sharing screenshots or forwarding the bot's messages directly to any other player will result in immediate removal from the game by the admin. The spirit of the game is deception, not cheating.</p>
+                </div>
+
                 <div>
                     <h2 class="text-2xl font-bold text-white mb-4">How to Play</h2>
                     <ol class="list-decimal list-inside space-y-4">
@@ -363,3 +369,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
