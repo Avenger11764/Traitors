@@ -6,14 +6,15 @@
     <title>Traitors: Interactive Game Guide</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Slate and Amber -->
-    <!-- Application Structure Plan: A tab-based navigation SPA. This structure was chosen to break down the dense rules into logical, digestible sections (Overview, Flow, Actions, Winning, Commands). It allows new players to learn step-by-step and experienced players to quickly reference specific rules (like commands) without scrolling through a long document. The flow is designed to guide from a high-level overview to detailed mechanics, which is optimal for usability and learning. -->
-    <!-- Visualization & Content Choices: 
-        - Report Info: Game Flow cycle. Goal: Explain the game's loop visually. Presentation: A responsive, horizontal flowchart made with styled HTML/CSS. Interaction: Clicking a stage reveals detailed text. Justification: A visual diagram is more intuitive than text for understanding a process. Library: HTML/Tailwind, JS for interaction.
-        - Report Info: Key Actions. Goal: Detail special moves. Presentation: A grid of cards with icons. Justification: Cards create clear visual separation for distinct concepts. Library: HTML/Tailwind.
-        - Report Info: Admin Commands. Goal: Easy reference. Presentation: A list with copy buttons. Interaction: Click to copy command. Justification: Copy-to-clipboard is a major UX improvement for a game played via a chat client. Library: HTML/Tailwind, JS for interaction.
+    <!-- 
+      Application Structure:
+      This is a single-page application (SPA) using a tab-based navigation system. This structure is ideal for breaking down complex game rules into logical, manageable sections (Overview, Game Flow, Actions, etc.). It allows new players to learn step-by-step, while letting experienced players quickly find specific information, like commands, without scrolling through a long document. The design guides the user from a high-level summary to detailed mechanics, which is optimal for learning and usability.
+
+      Visualization & Content Choices:
+      - Game Flow Diagram: A responsive, horizontal flowchart built with styled HTML/CSS. A visual diagram is more intuitive than text for understanding a cyclical process. JavaScript is used to handle clicks to show details for each stage.
+      - Key Actions Display: A grid of "cards," each with an icon. Cards provide clear visual separation for distinct concepts, making the different Traitor actions easy to differentiate.
+      - Command List: A list where each item has a copy-to-clipboard button. This is a significant user experience improvement for a game played in a chat client where commands must be typed accurately.
     -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -45,9 +46,9 @@
             <ul id="tabs" class="flex flex-wrap -mb-px text-sm font-medium text-center" role="tablist">
                 <li role="presentation"><button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-amber-400 hover:border-amber-400" data-tab-target="#overview" role="tab">Overview</button></li>
                 <li role="presentation"><button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-amber-400 hover:border-amber-400" data-tab-target="#flow" role="tab">Game Flow</button></li>
-                <li role-presentation><button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-amber-400 hover:border-amber-400" data-tab-target="#actions" role="tab">Key Actions</button></li>
-                <li role-presentation><button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-amber-400 hover:border-amber-400" data-tab-target="#winning" role="tab">Points & Winning</button></li>
-                <li role-presentation><button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-amber-400 hover:border-amber-400" data-tab-target="#commands" role="tab">Commands</button></li>
+                <li role="presentation"><button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-amber-400 hover:border-amber-400" data-tab-target="#actions" role="tab">Key Actions</button></li>
+                <li role="presentation"><button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-amber-400 hover:border-amber-400" data-tab-target="#winning" role="tab">Points & Winning</button></li>
+                <li role="presentation"><button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-amber-400 hover:border-amber-400" data-tab-target="#commands" role="tab">Commands</button></li>
             </ul>
         </nav>
 
@@ -57,7 +58,7 @@
             <div id="overview" role="tabpanel" class="tab-pane space-y-8">
                 <div>
                     <h2 class="text-2xl font-bold text-white mb-4">Welcome to the Game</h2>
-                    <p class="text-lg leading-relaxed">Among you, a small band of **Traitors** has been secretly chosen. Their mission: to build their fortune by systematically eliminating the **Faithful** and seizing their points. The Faithful, loyal and unsuspecting, must work together to uncover the conspiracy. Each day, you will gather to discuss, debate, and vote to banish one player you believe is a Traitor. But be warned... every decision has consequences. Can the Faithful unmask the villains before their numbers—or their points—run out? Or will the Traitors deceive their way to victory? Trust no one. Question everything. Your survival depends on it.</p>
+                    <p class="text-lg leading-relaxed">Among a group of **Faithful**, a small team of **Traitors** have been secretly chosen. Their mission is to build their fortune by murdering the Faithful and seizing their points. The Faithful must work together to identify and banish the Traitors through daily votes. Every decision has consequences. Can the Faithful unmask the villains before their team's points run out? Or will the Traitors deceive their way to victory? Trust no one. Question everything. Your survival depends on it.</p>
                 </div>
                 <div>
                     <h2 class="text-2xl font-bold text-white mb-4">How to Play</h2>
@@ -66,7 +67,7 @@
                             <span class="text-amber-400 font-bold text-2xl mr-4">1.</span>
                             <div>
                                 <h3 class="font-semibold text-lg text-white">Start a Game</h3>
-                                <p>The group admin starts a new game lobby by typing <code class="bg-slate-700 text-amber-400 px-2 py-1 rounded">/startgame</code> in the chat.</p>
+                                <p>An admin starts a new game lobby by typing <code class="bg-slate-700 text-amber-400 px-2 py-1 rounded">/startgame</code> in the chat.</p>
                             </div>
                         </li>
                         <li class="flex items-start">
@@ -80,7 +81,7 @@
                             <span class="text-amber-400 font-bold text-2xl mr-4">3.</span>
                             <div>
                                 <h3 class="font-semibold text-lg text-white">Begin the Game</h3>
-                                <p>The admin types <code class="bg-slate-700 text-amber-400 px-2 py-1 rounded">/begin</code> to lock the lobby, assign roles, and start the first night.</p>
+                                <p>The admin types <code class="bg-slate-700 text-amber-400 px-2 py-1 rounded">/begin</code> to lock the lobby, assign roles and points, and start the first night.</p>
                             </div>
                         </li>
                     </ol>
@@ -91,7 +92,7 @@
             <div id="flow" role="tabpanel" class="tab-pane hidden space-y-8">
                  <div>
                     <h2 class="text-2xl font-bold text-white mb-4">The Game Cycle</h2>
-                    <p class="mb-6">The game alternates between two main phases: Night and Day. The cycle continues until a team wins. Click on any stage to see more details about it.</p>
+                    <p class="mb-6">The game alternates between two main phases: Night and Day. The cycle continues until a team wins. The admin can run the game manually or set an automated schedule. Click on any stage to see more details about it.</p>
                     <div id="flow-diagram" class="flex flex-col md:flex-row items-center justify-center text-center">
                         <div class="flow-stage cursor-pointer p-4 bg-slate-800 rounded-lg border-2 border-transparent hover:border-amber-500" data-flow="night">
                             <div class="text-4xl mb-2">🌙</div>
@@ -113,34 +114,34 @@
                          <div class="w-1 h-8 md:h-1 md:w-8 bg-slate-700 my-2 md:my-0"></div>
                         <div class="flow-stage cursor-pointer p-4 bg-slate-800 rounded-lg border-2 border-transparent hover:border-amber-500" data-flow="cooldown">
                              <div class="text-4xl mb-2">⏳</div>
-                            <div class="font-bold text-white">Cooldown</div>
+                            <div class="font-bold text-white">Transition</div>
                         </div>
                     </div>
-                    <div id="flow-details" class="mt-6 p-4 bg-slate-800 rounded-lg min-h-[100px]">
+                    <div id="flow-details" class="mt-6 p-6 bg-slate-800 rounded-lg min-h-[120px]">
                         <p>Click a stage above to learn more.</p>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Key Actions Tab -->
             <div id="actions" role="tabpanel" class="tab-pane hidden space-y-8">
                  <h2 class="text-2xl font-bold text-white">Traitors' Arsenal</h2>
-                 <p>During the Night Phase, Traitors get to perform one of a few powerful secret actions.</p>
+                 <p>During the Night Phase, one Traitor is randomly prompted to perform a secret action on behalf of their team.</p>
                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div class="bg-slate-800 p-6 rounded-lg">
                         <div class="text-4xl mb-3">🔪</div>
                         <h3 class="text-xl font-bold text-white mb-2">Murder</h3>
-                        <p>The Traitors' primary action. They choose one Faithful to eliminate. The murdered player is banished, and their entire point balance is transferred to the Traitor team.</p>
+                        <p>The Traitors' primary action. They choose one Faithful to eliminate. The murdered player is removed from the game, and their entire point balance is transferred to the Traitor team's pool.</p>
                     </div>
                      <div class="bg-slate-800 p-6 rounded-lg">
                         <div class="text-4xl mb-3">👤</div>
                         <h3 class="text-xl font-bold text-white mb-2">Recruit</h3>
-                        <p>Available when 2 Traitors remain. They can choose to forgo a murder and instead secretly offer a Faithful player the chance to become a Traitor.</p>
+                        <p>Available when 2 or more Traitors are active. They can choose to forgo a murder and instead secretly offer a Faithful player the chance to become a Traitor.</p>
                     </div>
                      <div class="bg-slate-800 p-6 rounded-lg">
                         <div class="text-4xl mb-3">🤫</div>
                         <h3 class="text-xl font-bold text-white mb-2">Blackmail</h3>
-                        <p>Available when only 1 Traitor remains. The last Traitor can give a Faithful an ultimatum: become a Traitor or be murdered on the spot.</p>
+                        <p>Available only when 1 Traitor remains. The final Traitor can give a Faithful an ultimatum: join the Traitors, or stay Faithful and lose 100 points, which are transferred to the Traitor.</p>
                     </div>
                  </div>
             </div>
@@ -148,39 +149,34 @@
             <!-- Winning Tab -->
             <div id="winning" role="tabpanel" class="tab-pane hidden space-y-8">
                 <h2 class="text-2xl font-bold text-white">How to Win</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="text-xl font-bold text-amber-400 mb-3">The Faithful's Path to Victory</h3>
-                        <ul class="list-disc list-inside space-y-2">
-                           <li>Vote to banish all of the Traitors.</li>
-                           <li>Survive until the Traitor team runs out of points.</li>
-                           <li>Have more team points than the Traitors if the game is ended by an admin.</li>
+                <div class="space-y-4">
+                    <p><strong class="text-amber-400">By Elimination:</strong> A team wins if all members of the opposing team have been eliminated (banished or murdered).</p>
+                    <p><strong class="text-amber-400">By Points:</strong> A team wins if the opposing team's total score drops to 0 or below.</p>
+                    <p><strong class="text-amber-400">The Final Two:</strong> If the game comes down to two players:
+                        <ul class="list-disc list-inside ml-4 mt-2">
+                           <li>If one is a Traitor and one is a Faithful, the **Traitors win** immediately.</li>
+                           <li>If both are from the same team, the team with the **highest point total wins**.</li>
                         </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-amber-400 mb-3">The Traitors' Path to Victory</h3>
-                        <ul class="list-disc list-inside space-y-2">
-                            <li>Eliminate Faithfuls until your numbers are equal.</li>
-                            <li>Bankrupt the Faithful team by reducing their total points to zero.</li>
-                             <li>Have more team points than the Faithful if the game is ended by an admin.</li>
-                        </ul>
-                    </div>
+                    </p>
+                     <p><strong class="text-amber-400">By Admin Decision:</strong> If an admin uses <code class="bg-slate-700 text-amber-400 px-1 py-0.5 rounded">/endgame</code>, the team with the higher point total wins.</p>
                 </div>
                  <h2 class="text-2xl font-bold text-white mt-8">The Point System</h2>
-                 <p>Both teams start with a shared pool of 1000 points. The flow of these points is critical to victory.</p>
+                 <p>Both teams start with a shared pool of 1000 points, divided equally among team members. The flow of these points is critical to victory.</p>
                  <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-8">
                      <div class="bg-slate-800 p-6 rounded-lg">
                          <h3 class="text-lg font-semibold text-green-400 mb-2">Points are Gained When...</h3>
-                         <ul class="list-disc list-inside">
-                            <li>Your team banishes a member of the opposing team.</li>
-                            <li>The Traitors successfully murder a Faithful.</li>
+                         <ul class="list-disc list-inside space-y-2">
+                            <li><strong>Faithfuls:</strong> Your team votes to banish a Traitor. The banished Traitor's points are seized and distributed among all active Faithfuls.</li>
+                            <li><strong>Traitors:</strong> Your team murders a Faithful. The victim's points are transferred to the active Traitors.</li>
+                            <li><strong>Traitors:</strong> Your team votes to banish a Faithful. The victim's points are transferred to the active Traitors.</li>
+                             <li><strong>Traitors:</strong> A Faithful declines a Blackmail offer, transferring 100 points to the last Traitor.</li>
                          </ul>
                      </div>
                       <div class="bg-slate-800 p-6 rounded-lg">
                          <h3 class="text-lg font-semibold text-red-400 mb-2">Points are Lost When...</h3>
-                         <ul class="list-disc list-inside">
-                            <li>A member of your team is banished or murdered.</li>
-                            <li>The opposition takes your team member's points.</li>
+                         <ul class="list-disc list-inside space-y-2">
+                             <li>A member of your team is banished or murdered. Their points are transferred to the opposing team.</li>
+                             <li>A Traitor successfully blackmails one of your Faithful teammates, costing them 100 points.</li>
                          </ul>
                      </div>
                  </div>
@@ -188,55 +184,62 @@
 
             <!-- Commands Tab -->
             <div id="commands" role="tabpanel" class="tab-pane hidden space-y-6">
-                <h2 class="text-2xl font-bold text-white">Admin Commands Reference</h2>
-                <p>A quick reference for all game commands. Click the copy button to easily use them in Telegram.</p>
+                <h2 class="text-2xl font-bold text-white">Game Commands Reference</h2>
+                <p>A quick reference for all game commands. Player commands are for everyone; Admin commands are only for the user who started the game. Click the copy button to easily use them in Telegram.</p>
                 <div class="space-y-4">
                     <div class="p-4 bg-slate-800 rounded-lg flex items-center justify-between">
                         <div>
-                            <code class="command-text text-amber-400 font-mono">/startgame</code>
+                            <code class="command-text text-amber-400 font-mono">/startgame</code> <span class="text-xs font-semibold text-slate-400">(Admin)</span>
                             <p class="text-sm text-slate-400">Creates a new game lobby for players to join.</p>
                         </div>
                         <button class="copy-btn bg-slate-700 hover:bg-slate-600 text-white font-bold py-1 px-3 rounded text-sm">Copy</button>
                     </div>
                     <div class="p-4 bg-slate-800 rounded-lg flex items-center justify-between">
                         <div>
-                            <code class="command-text text-amber-400 font-mono">/join</code>
+                            <code class="command-text text-amber-400 font-mono">/join</code> <span class="text-xs font-semibold text-slate-400">(Player)</span>
                             <p class="text-sm text-slate-400">Allows a player to join an open game lobby.</p>
                         </div>
                         <button class="copy-btn bg-slate-700 hover:bg-slate-600 text-white font-bold py-1 px-3 rounded text-sm">Copy</button>
                     </div>
                      <div class="p-4 bg-slate-800 rounded-lg flex items-center justify-between">
                         <div>
-                            <code class="command-text text-amber-400 font-mono">/begin</code>
+                            <code class="command-text text-amber-400 font-mono">/begin</code> <span class="text-xs font-semibold text-slate-400">(Admin)</span>
                             <p class="text-sm text-slate-400">Starts the game, assigns roles, and begins Night 1.</p>
                         </div>
                         <button class="copy-btn bg-slate-700 hover:bg-slate-600 text-white font-bold py-1 px-3 rounded text-sm">Copy</button>
                     </div>
-                     <div class="p-4 bg-slate-800 rounded-lg flex items-center justify-between">
+                    <div class="p-4 bg-slate-800 rounded-lg flex items-center justify-between">
                         <div>
-                            <code class="command-text text-amber-400 font-mono">/startvote</code>
-                            <p class="text-sm text-slate-400">Manually ends the Night and starts the Day's vote.</p>
+                             <code class="command-text text-amber-400 font-mono">/schedule_cycle HH:MM</code> <span class="text-xs font-semibold text-slate-400">(Admin)</span>
+                            <p class="text-sm text-slate-400">Schedules the first Day Phase for the given time and enables automatic 6-hour Day/Night cycles.</p>
                         </div>
                         <button class="copy-btn bg-slate-700 hover:bg-slate-600 text-white font-bold py-1 px-3 rounded text-sm">Copy</button>
                     </div>
                      <div class="p-4 bg-slate-800 rounded-lg flex items-center justify-between">
                         <div>
-                            <code class="command-text text-amber-400 font-mono">/schedule_vote HH:MM</code>
-                            <p class="text-sm text-slate-400">Schedules the Day Phase and vote for a specific time.</p>
+                            <code class="command-text text-amber-400 font-mono">/startvote</code> <span class="text-xs font-semibold text-slate-400">(Admin)</span>
+                            <p class="text-sm text-slate-400">Manually overrides any schedule to start the Day Phase and banishment vote immediately.</p>
+                        </div>
+                        <button class="copy-btn bg-slate-700 hover:bg-slate-600 text-white font-bold py-1 px-3 rounded text-sm">Copy</button>
+                    </div>
+                    <div class="p-4 bg-slate-800 rounded-lg flex items-center justify-between">
+                        <div>
+                            <code class="command-text text-amber-400 font-mono">/startnight</code> <span class="text-xs font-semibold text-slate-400">(Admin)</span>
+                            <p class="text-sm text-slate-400">Manually overrides any cooldown to start the Night Phase immediately.</p>
                         </div>
                         <button class="copy-btn bg-slate-700 hover:bg-slate-600 text-white font-bold py-1 px-3 rounded text-sm">Copy</button>
                     </div>
                      <div class="p-4 bg-slate-800 rounded-lg flex items-center justify-between">
                         <div>
-                            <code class="command-text text-amber-400 font-mono">/remove [PlayerName]</code>
-                            <p class="text-sm text-slate-400">Instantly removes a cheating player from the game.</p>
+                            <code class="command-text text-amber-400 font-mono">/remove [PlayerName]</code> <span class="text-xs font-semibold text-slate-400">(Admin)</span>
+                            <p class="text-sm text-slate-400">Forcibly removes a player from the game. Their role is revealed and points are transferred.</p>
                         </div>
                         <button class="copy-btn bg-slate-700 hover:bg-slate-600 text-white font-bold py-1 px-3 rounded text-sm">Copy</button>
                     </div>
                      <div class="p-4 bg-slate-800 rounded-lg flex items-center justify-between">
                         <div>
-                            <code class="command-text text-amber-400 font-mono">/endgame</code>
-                            <p class="text-sm text-slate-400">Ends the game and declares a winner by points.</p>
+                            <code class="command-text text-amber-400 font-mono">/endgame</code> <span class="text-xs font-semibold text-slate-400">(Admin)</span>
+                            <p class="text-sm text-slate-400">Immediately ends the game and declares a winner based on the current team point totals.</p>
                         </div>
                         <button class="copy-btn bg-slate-700 hover:bg-slate-600 text-white font-bold py-1 px-3 rounded text-sm">Copy</button>
                     </div>
@@ -247,60 +250,83 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Element Selectors ---
     const tabs = document.querySelectorAll('[data-tab-target]');
     const tabContents = document.querySelectorAll('.tab-pane');
     const flowStages = document.querySelectorAll('.flow-stage');
     const flowDetails = document.getElementById('flow-details');
     const copyButtons = document.querySelectorAll('.copy-btn');
 
+    // --- Data for Interactive Elements ---
     const flowDescriptions = {
         night: `
-            <h3 class="font-bold text-white mb-2">The Night Phase</h3>
-            <p>The game begins on Night 1. The Traitors receive a secret message from the bot, allowing them to perform an action (Murder, Recruit, or Blackmail). The Faithful do nothing and must wait for the day to begin. This phase ends when the admin initiates the Day Phase.</p>`,
+            <h3 class="font-bold text-white mb-2">The Night Phase 🌙</h3>
+            <p>The game begins on Night 1. The bot secretly messages one random Traitor, allowing them to perform an action (Murder, Recruit, or Blackmail) on behalf of their team. The Faithful do nothing and must wait for the day to begin. This phase ends either automatically or when an admin starts the day manually.</p>`,
         day: `
-            <h3 class="font-bold text-white mb-2">The Day Phase</h3>
-            <p>The admin starts the day using /startvote or /schedule_vote. The bot announces any murders from the night, shows updated team scores, and then opens the floor for discussion among the players.</p>`,
+            <h3 class="font-bold text-white mb-2">The Day Phase ☀️</h3>
+            <p>The Day Phase begins when scheduled or when an admin uses /startvote. The bot first announces any murders from the night and shows updated team scores. The floor is then open for discussion among all players to decide who they suspect is a Traitor.</p>`,
         vote: `
-            <h3 class="font-bold text-white mb-2">Banishment Vote</h3>
-            <p>The bot posts a public poll with all active players' names. Every active player must vote to banish one person. The player with the most votes is banished, their role is revealed, and their points are transferred to the opposition.</p>`,
+            <h3 class="font-bold text-white mb-2">Banishment Vote 🗳️</h3>
+            <p>The bot posts a public poll with all active players' names. Every active player must vote to banish one person. The player with the most votes is banished, their role is revealed, and their points are transferred to the opposing team. A tie results in no banishment.</p>`,
         cooldown: `
-            <h3 class="font-bold text-white mb-2">Cooldown Period</h3>
-            <p>After a vote concludes, there is a 12-hour cooldown period. After this time, the next Night Phase begins automatically, and the cycle continues.</p>`
+            <h3 class="font-bold text-white mb-2">Transition Period ⏳</h3>
+            <p>After a vote concludes, the game transitions to the next phase. 
+            <br>• <b>Manual Mode:</b> There is a 12-hour wait before the next Night begins. This can be skipped with /startnight.
+            <br>• <b>Automated Mode:</b> If started with /schedule_cycle, there is a 6-hour wait before the next Night begins automatically.</p>`
     };
 
-    // Set default active tab
-    tabs[0].classList.add('tab-active');
-    tabContents[0].classList.remove('hidden');
+    // --- Initialization ---
+    // Set the first tab as active by default
+    if (tabs.length > 0) {
+        tabs[0].classList.add('tab-active');
+        const initialTarget = document.querySelector(tabs[0].dataset.tabTarget);
+        if (initialTarget) initialTarget.classList.remove('hidden');
+    }
 
+    // --- Event Listeners ---
+    // Handle tab navigation
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             const target = document.querySelector(tab.dataset.tabTarget);
             
+            // Update tab visual state
             tabs.forEach(t => t.classList.remove('tab-active'));
             tab.classList.add('tab-active');
 
+            // Show the correct content panel
             tabContents.forEach(tc => tc.classList.add('hidden'));
-            target.classList.remove('hidden');
+            if (target) {
+                target.classList.remove('hidden');
+            }
         });
     });
 
+    // Handle clicks on the game flow diagram
     flowStages.forEach(stage => {
         stage.addEventListener('click', () => {
             const flowKey = stage.dataset.flow;
             
+            // Update visual state of the clicked stage
             flowStages.forEach(s => s.classList.remove('border-amber-500', 'bg-slate-700'));
             stage.classList.add('border-amber-500', 'bg-slate-700');
             
-            flowDetails.innerHTML = flowDescriptions[flowKey];
+            // Display the corresponding description
+            if (flowDescriptions[flowKey]) {
+                flowDetails.innerHTML = flowDescriptions[flowKey];
+            }
         });
     });
 
+    // Handle clicks on all "Copy" buttons
     copyButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const commandText = button.previousElementSibling.querySelector('.command-text').innerText;
+            const commandTextElement = button.parentElement.querySelector('.command-text');
+            if (!commandTextElement) return;
+            const commandText = commandTextElement.innerText;
             
-            // Use the Clipboard API
+            // Use the modern Clipboard API
             navigator.clipboard.writeText(commandText).then(() => {
+                // Provide visual feedback to the user
                 const originalText = button.innerText;
                 button.innerText = 'Copied!';
                 button.disabled = true;
@@ -309,14 +335,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     button.disabled = false;
                 }, 2000);
             }).catch(err => {
-                console.error('Failed to copy: ', err);
-                // Fallback for older browsers
+                console.error('Failed to copy command: ', err);
+                // Fallback for older browsers or insecure contexts
                 const textArea = document.createElement('textarea');
                 textArea.value = commandText;
                 document.body.appendChild(textArea);
                 textArea.select();
                 try {
                     document.execCommand('copy');
+                    // Provide visual feedback for the fallback method
                     const originalText = button.innerText;
                     button.innerText = 'Copied!';
                     button.disabled = true;
@@ -325,7 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         button.disabled = false;
                     }, 2000);
                 } catch (e) {
-                    console.error('Fallback copy failed', e);
+                    console.error('Fallback copy method failed', e);
                 }
                 document.body.removeChild(textArea);
             });
