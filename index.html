@@ -98,7 +98,7 @@
             <div id="flow" role="tabpanel" class="tab-pane hidden space-y-8">
                  <div>
                     <h2 class="text-2xl font-bold text-white mb-4">The Game Cycle</h2>
-                    <p class="mb-6">The game alternates between two main phases: Night and Day. The cycle continues until a team wins. The admin can run the game manually or set an automated schedule. Click on any stage to see more details about it.</p>
+                    <p class="mb-6">The game alternates between phases with automated timers. Admins can use commands to override these timers. Click a stage for details.</p>
                     <div id="flow-diagram" class="flex flex-col md:flex-row items-center justify-center text-center">
                         <div class="flow-stage cursor-pointer p-4 bg-slate-800 rounded-lg border-2 border-transparent hover:border-amber-500" data-flow="night">
                             <div class="text-4xl mb-2">🌙</div>
@@ -108,7 +108,7 @@
                         <div class="w-1 h-8 md:h-1 md:w-8 bg-slate-700 my-2 md:my-0"></div>
                         <div class="flow-stage cursor-pointer p-4 bg-slate-800 rounded-lg border-2 border-transparent hover:border-amber-500" data-flow="day">
                              <div class="text-4xl mb-2">☀️</div>
-                            <div class="font-bold text-white">Day Phase</div>
+                            <div class="font-bold text-white">Day Discussion</div>
                         </div>
                          <div class="flow-arrow hidden md:block"></div>
                          <div class="w-1 h-8 md:h-1 md:w-8 bg-slate-700 my-2 md:my-0"></div>
@@ -119,11 +119,10 @@
                         <div class="flow-arrow hidden md:block"></div>
                          <div class="w-1 h-8 md:h-1 md:w-8 bg-slate-700 my-2 md:my-0"></div>
                         <div class="flow-stage cursor-pointer p-4 bg-slate-800 rounded-lg border-2 border-transparent hover:border-amber-500" data-flow="cooldown">
-                             <div class="text-4xl mb-2">⏳</div>
-                            <div class="font-bold text-white">Transition</div>
+                             <div class="text-4xl mb-2">Transition</div>
                         </div>
                     </div>
-                    <div id="flow-details" class="mt-6 p-6 bg-slate-800 rounded-lg min-h-[120px]">
+                    <div id="flow-details" class="mt-6 p-6 bg-slate-800 rounded-lg min-h-[140px]">
                         <p>Click a stage above to learn more.</p>
                     </div>
                 </div>
@@ -131,23 +130,28 @@
 
             <!-- Key Actions Tab -->
             <div id="actions" role="tabpanel" class="tab-pane hidden space-y-8">
-                 <h2 class="text-2xl font-bold text-white">Traitors' Arsenal</h2>
-                 <p>During the Night Phase, one Traitor is randomly prompted to perform a secret action on behalf of their team.</p>
-                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                 <h2 class="text-2xl font-bold text-white">Traitors' Arsenal & Divine Intervention</h2>
+                 <p>During the Night Phase, Traitors perform a secret action. However, a Faithful might be secretly protected.</p>
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                    <div class="bg-slate-800 p-6 rounded-lg col-span-1 md:col-span-2 lg:col-span-2">
+                        <div class="text-4xl mb-3">🛡️</div>
+                        <h3 class="text-xl font-bold text-white mb-2">Divine Shield (Faithful)</h3>
+                        <p>At the start of each night, there is a 50% chance a random, active Faithful will be granted a Divine Shield. This player is notified privately. A shield protects them from being murdered and from losing points to blackmail for that one night.</p>
+                    </div>
                     <div class="bg-slate-800 p-6 rounded-lg">
                         <div class="text-4xl mb-3">🔪</div>
-                        <h3 class="text-xl font-bold text-white mb-2">Murder</h3>
-                        <p>The Traitors' primary action. They choose one Faithful to eliminate. The murdered player is removed from the game, and their entire point balance is transferred to the Traitor team's pool.</p>
+                        <h3 class="text-xl font-bold text-white mb-2">Murder (Traitor)</h3>
+                        <p>The Traitors' primary action. They choose one Faithful to eliminate. If the target is not shielded, they are removed from the game, and their points are transferred to the Traitor team's pool.</p>
                     </div>
                      <div class="bg-slate-800 p-6 rounded-lg">
                         <div class="text-4xl mb-3">👤</div>
-                        <h3 class="text-xl font-bold text-white mb-2">Recruit</h3>
-                        <p>Available when 2 or more Traitors are active. They can choose to forgo a murder and instead secretly offer a Faithful player the chance to become a Traitor.</p>
+                        <h3 class="text-xl font-bold text-white mb-2">Recruit (Traitor)</h3>
+                        <p>Available when 2 or more Traitors are active. They can forgo a murder and instead secretly offer a Faithful the chance to become a Traitor.</p>
                     </div>
                      <div class="bg-slate-800 p-6 rounded-lg">
                         <div class="text-4xl mb-3">🤫</div>
-                        <h3 class="text-xl font-bold text-white mb-2">Blackmail</h3>
-                        <p>Available only when 1 Traitor remains. The final Traitor can give a Faithful an ultimatum: join the Traitors, or stay Faithful and lose 100 points, which are transferred to the Traitor.</p>
+                        <h3 class="text-xl font-bold text-white mb-2">Blackmail (Traitor)</h3>
+                        <p>Available only when 1 Traitor remains. The final Traitor can give a Faithful an ultimatum: join the Traitors, or stay Faithful and lose 100 points (unless shielded).</p>
                     </div>
                  </div>
             </div>
@@ -182,7 +186,7 @@
                          <h3 class="text-lg font-semibold text-red-400 mb-2">Points are Lost When...</h3>
                          <ul class="list-disc list-inside space-y-2">
                              <li>A member of your team is banished or murdered. Their points are transferred to the opposing team.</li>
-                             <li>A Traitor successfully blackmails one of your Faithful teammates, costing them 100 points.</li>
+                             <li>A Traitor successfully blackmails one of your Faithful teammates, costing them 100 points (unless they are shielded).</li>
                          </ul>
                      </div>
                  </div>
@@ -191,7 +195,7 @@
             <!-- Commands Tab -->
             <div id="commands" role="tabpanel" class="tab-pane hidden space-y-6">
                 <h2 class="text-2xl font-bold text-white">Game Commands Reference</h2>
-                <p>A quick reference for all game commands. Player commands are for everyone; Admin commands are only for the user who started the game. Click the copy button to easily use them in Telegram.</p>
+                <p>A quick reference for all game commands. Admin commands can be used by the player who started the game or any chat administrator.</p>
                 <div class="space-y-4">
                     <div class="p-4 bg-slate-800 rounded-lg flex items-center justify-between">
                         <div>
@@ -207,6 +211,13 @@
                         </div>
                         <button class="copy-btn bg-slate-700 hover:bg-slate-600 text-white font-bold py-1 px-3 rounded text-sm">Copy</button>
                     </div>
+                    <div class="p-4 bg-slate-800 rounded-lg flex items-center justify-between">
+                        <div>
+                            <code class="command-text text-amber-400 font-mono">/leave</code> <span class="text-xs font-semibold text-slate-400">(Player)</span>
+                            <p class="text-sm text-slate-400">Allows a player to leave the lobby or an active game.</p>
+                        </div>
+                        <button class="copy-btn bg-slate-700 hover:bg-slate-600 text-white font-bold py-1 px-3 rounded text-sm">Copy</button>
+                    </div>
                      <div class="p-4 bg-slate-800 rounded-lg flex items-center justify-between">
                         <div>
                             <code class="command-text text-amber-400 font-mono">/begin</code> <span class="text-xs font-semibold text-slate-400">(Admin)</span>
@@ -216,29 +227,36 @@
                     </div>
                     <div class="p-4 bg-slate-800 rounded-lg flex items-center justify-between">
                         <div>
-                             <code class="command-text text-amber-400 font-mono">/schedule_cycle HH:MM</code> <span class="text-xs font-semibold text-slate-400">(Admin)</span>
-                            <p class="text-sm text-slate-400">Schedules the first Day Phase for a specific time (in UTC) and enables automatic 6-hour Day/Night cycles.</p>
+                             <code class="command-text text-amber-400 font-mono">/startday</code> <span class="text-xs font-semibold text-slate-400">(Admin)</span>
+                            <p class="text-sm text-slate-400">Manually starts the Day Discussion phase, overriding the timer.</p>
                         </div>
                         <button class="copy-btn bg-slate-700 hover:bg-slate-600 text-white font-bold py-1 px-3 rounded text-sm">Copy</button>
                     </div>
                      <div class="p-4 bg-slate-800 rounded-lg flex items-center justify-between">
                         <div>
                             <code class="command-text text-amber-400 font-mono">/startvote</code> <span class="text-xs font-semibold text-slate-400">(Admin)</span>
-                            <p class="text-sm text-slate-400">Manually overrides any schedule to start the Day Phase and banishment vote immediately.</p>
+                            <p class="text-sm text-slate-400">Manually starts the Banishment Vote, overriding the discussion timer.</p>
+                        </div>
+                        <button class="copy-btn bg-slate-700 hover:bg-slate-600 text-white font-bold py-1 px-3 rounded text-sm">Copy</button>
+                    </div>
+                     <div class="p-4 bg-slate-800 rounded-lg flex items-center justify-between">
+                        <div>
+                            <code class="command-text text-amber-400 font-mono">/endvote</code> <span class="text-xs font-semibold text-slate-400">(Admin)</span>
+                            <p class="text-sm text-slate-400">Forces the voting round to end and tallies the current votes, even if not all players have voted.</p>
                         </div>
                         <button class="copy-btn bg-slate-700 hover:bg-slate-600 text-white font-bold py-1 px-3 rounded text-sm">Copy</button>
                     </div>
                     <div class="p-4 bg-slate-800 rounded-lg flex items-center justify-between">
                         <div>
                             <code class="command-text text-amber-400 font-mono">/startnight</code> <span class="text-xs font-semibold text-slate-400">(Admin)</span>
-                            <p class="text-sm text-slate-400">Manually overrides any cooldown to start the Night Phase immediately.</p>
+                            <p class="text-sm text-slate-400">Manually starts the Night Phase, overriding the transition timer.</p>
                         </div>
                         <button class="copy-btn bg-slate-700 hover:bg-slate-600 text-white font-bold py-1 px-3 rounded text-sm">Copy</button>
                     </div>
                      <div class="p-4 bg-slate-800 rounded-lg flex items-center justify-between">
                         <div>
-                            <code class="command-text text-amber-400 font-mono">/remove [PlayerName]</code> <span class="text-xs font-semibold text-slate-400">(Admin)</span>
-                            <p class="text-sm text-slate-400">Forcibly removes a player from the game. Their role is revealed and points are transferred.</p>
+                            <code class="command-text text-amber-400 font-mono">/remove @Player</code> <span class="text-xs font-semibold text-slate-400">(Admin)</span>
+                            <p class="text-sm text-slate-400">Forcibly removes a player by mentioning them. Their role is revealed and points are transferred.</p>
                         </div>
                         <button class="copy-btn bg-slate-700 hover:bg-slate-600 text-white font-bold py-1 px-3 rounded text-sm">Copy</button>
                     </div>
@@ -267,18 +285,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const flowDescriptions = {
         night: `
             <h3 class="font-bold text-white mb-2">The Night Phase 🌙</h3>
-            <p>The game begins on Night 1. The bot secretly messages one random Traitor, allowing them to perform an action (Murder, Recruit, or Blackmail) on behalf of their team. The Faithful do nothing and must wait for the day to begin. This phase ends either automatically or when an admin starts the day manually.</p>`,
+            <p>A random Traitor is prompted to act. There's also a 50% chance a random Faithful gets a Divine Shield, protecting them from murder and blackmail. After the Traitors act, the Day Discussion phase is scheduled to begin in 6 hours.</p>`,
         day: `
-            <h3 class="font-bold text-white mb-2">The Day Phase ☀️</h3>
-            <p>The Day Phase begins when scheduled or when an admin uses /startvote. The bot first announces any murders from the night and shows updated team scores. The floor is then open for discussion among all players to decide who they suspect is a Traitor.</p>`,
+            <h3 class="font-bold text-white mb-2">Day Discussion ☀️</h3>
+            <p>The day begins, revealing any murders. Players now have a 3-hour discussion period to debate who the Traitors are. The admin can skip this timer with /startvote.</p>`,
         vote: `
             <h3 class="font-bold text-white mb-2">Banishment Vote 🗳️</h3>
-            <p>The bot posts a public poll with all active players' names. Every active player must vote to banish one person. The player with the most votes is banished, their role is revealed, and their points are transferred to the opposing team. A tie results in no banishment.</p>`,
+            <p>Each active player receives a private message from the bot to cast their vote. First, you select a target with a button. Then, you must reply with a text message in the DM explaining your reason. Once all votes are in (or an admin uses /endvote), the results are revealed publicly.</p>`,
         cooldown: `
-            <h3 class="font-bold text-white mb-2">Transition Period ⏳</h3>
-            <p>After a vote concludes, the game transitions to the next phase. 
-            <br>• <b>Manual Mode:</b> There is a 12-hour wait before the next Night begins. This can be skipped with /startnight.
-            <br>• <b>Automated Mode:</b> If started with /schedule_cycle, there is a 6-hour wait before the next Night begins automatically. <strong>Note: All scheduled times are based on the UTC timezone.</strong></p>`
+            <h3 class="font-bold text-white mb-2">Transition ⏳</h3>
+            <p>After the vote results are announced, there is a 3-hour cooldown before the next Night Phase begins automatically. The admin can skip this timer with /startnight.</p>`
     };
 
     // --- Initialization ---
@@ -326,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle clicks on all "Copy" buttons
     copyButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const commandTextElement = button.parentElement.querySelector('.command-text');
+            const commandTextElement = button.closest('.flex').querySelector('.command-text');
             if (!commandTextElement) return;
             const commandText = commandTextElement.innerText;
             
